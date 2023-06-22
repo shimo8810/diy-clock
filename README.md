@@ -1,1 +1,1 @@
-# diy-clock
+# DIY Clock
