@@ -1,0 +1,14 @@
+# KiCAD files
+*.000
+*.bak
+*.bck
+*.kicad_pcb-bak
+*.sch-bak
+*.net
+*.dsn
+*.zip
+fp-info-cache
+
+# KiCAD bom
+splitflap.xml
+sensor.xml
