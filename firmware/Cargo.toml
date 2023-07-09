@@ -1,0 +1,31 @@
+[package]
+name = "clock-firmware"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "clock-firmware"
+test = false
+bench = false
+
+[dependencies]
+panic-halt = "0.2.0"
+embedded-hal = "0.2.3"
+
+[dependencies.attiny-hal]
+git = "https://github.com/rahix/avr-hal"
+rev = "7dfa6d322b9df98b2d98afe0e14a97afe0187ac1"
+features = ["attiny2313", "rt"]
+
+
+[profile.dev]
+panic = "abort"
+lto = true
+opt-level = "s"
+
+[profile.release]
+panic = "abort"
+codegen-units = 1
+debug = true
+lto = true
+opt-level = "s"
