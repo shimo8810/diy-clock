@@ -26,5 +26,8 @@ In this project, we use FT232RL to write firmware to the clock. The connection b
 We use avrdude for writing the firmware. Writing can be performed with the following command. When writing for the first time, it is necessary to configure the fuse settings for attiny2313. Since we are running attiny2313 with an external oscillator (16MHz) and no prescaler, please write with the following settings.
 
 ```sh
-avrdude -c diecimila -p t2313 -U flash:w:./target/avr-attiny2313/release/blink-attiny2313.elf:e -U lfuse:w:0xff:m
+avrdude -c diecimila \
+        -p t2313 \
+        -U flash:w:./target/avr-attiny2313/release/blink-attiny2313.elf:e \
+        -U lfuse:w:0xff:m
 ```
