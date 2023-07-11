@@ -73,6 +73,7 @@ name = "clock-firmware"
 version = "0.1.0"
 dependencies = [
  "attiny-hal",
+ "avr-device",
  "embedded-hal",
  "panic-halt",
 ]

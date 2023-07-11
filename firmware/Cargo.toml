@@ -11,6 +11,7 @@ bench = false
 [dependencies]
 panic-halt = "0.2.0"
 embedded-hal = "0.2.3"
+avr-device = "0.5.1"
 
 [dependencies.attiny-hal]
 git = "https://github.com/rahix/avr-hal"
