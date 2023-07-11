@@ -14,11 +14,11 @@ The knowledge of developing embedded systems using Rust are scattered, so I want
 
 ## Electronics Circuit
 
-![PCB 3D](images/3d.png)
+![PCB 3D](assets/3d.png)
 
-![PCB](images/pcb.png)
+![PCB](assets/pcb.png)
 
-![schematic](images/schematic.png)
+![schematic](assets/schematic.png)
 
 ## FirmWare
 
