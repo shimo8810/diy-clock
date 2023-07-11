@@ -1,7 +1,8 @@
 use attiny_hal as hal;
-
 use hal::port::mode::*;
 use hal::port::*;
+
+use crate::delay::delay_ms;
 
 const NUMS: [u8; 10] = [
     0xFC, // 0
@@ -112,5 +113,38 @@ impl Ssd {
             self.srclk.set_high();
         }
         self.rclk.set_high();
+    }
+
+    pub fn display_number(&mut self, mut n: usize, doton: bool) {
+        let ms = 1;
+        self.set_number(n % 10);
+        self.on_dig(3);
+        delay_ms(ms);
+        self.light_off();
+
+        n /= 10;
+        self.set_number(n % 10);
+        self.on_dig(2);
+        delay_ms(ms);
+        self.light_off();
+
+        n /= 10;
+        self.set_number(n % 10);
+        self.on_dig(1);
+        delay_ms(ms);
+        self.light_off();
+
+        n /= 10;
+        self.set_number(n % 10);
+        self.on_dig(0);
+        delay_ms(ms);
+        self.light_off();
+
+        if doton {
+            self.dot_on();
+            self.on_dig(4);
+            delay_ms(ms);
+            self.light_off();
+        }
     }
 }
