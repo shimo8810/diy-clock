@@ -69,16 +69,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
 
 [[package]]
-name = "clock-firmware"
-version = "0.1.0"
-dependencies = [
- "attiny-hal",
- "avr-device",
- "embedded-hal",
- "panic-halt",
-]
-
-[[package]]
 name = "embedded-hal"
 version = "0.2.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -93,6 +83,16 @@ name = "embedded-storage"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "723dce4e9f25b6e6c5f35628e144794e5b459216ed7da97b7c4b66cdb3fa82ca"
+
+[[package]]
+name = "firmware"
+version = "0.1.0"
+dependencies = [
+ "attiny-hal",
+ "avr-device",
+ "embedded-hal",
+ "panic-halt",
+]
 
 [[package]]
 name = "nb"

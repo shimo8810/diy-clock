@@ -1,10 +1,14 @@
 [package]
-name = "clock-firmware"
+name = "firmware"
 version = "0.1.0"
 edition = "2021"
 
+[lib]
+test = false
+bench = false
+
 [[bin]]
-name = "clock-firmware"
+name = "clock"
 test = false
 bench = false
 
