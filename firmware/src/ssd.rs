@@ -18,16 +18,18 @@ const NUMS: [u8; 10] = [
 ];
 
 const DOT: u8 = 0xC0;
+const E: u8 = 0x9E;
+const R: u8 = 0x8C;
 
 pub struct Ssd {
-    pub rclk: Pin<Output, PD0>,
-    pub ser: Pin<Output, PD1>,
-    pub srclk: Pin<Output, PD2>,
-    pub d1: Pin<Output, PD3>,
-    pub d2: Pin<Output, PD4>,
-    pub d3: Pin<Output, PD5>,
-    pub d4: Pin<Output, PD6>,
-    pub dd: Pin<Output, PB0>,
+    rclk: Pin<Output, PD0>,
+    ser: Pin<Output, PD1>,
+    srclk: Pin<Output, PD2>,
+    d1: Pin<Output, PD3>,
+    d2: Pin<Output, PD4>,
+    d3: Pin<Output, PD5>,
+    d4: Pin<Output, PD6>,
+    dd: Pin<Output, PB0>,
 }
 
 #[allow(clippy::too_many_arguments)]
@@ -115,7 +117,7 @@ impl Ssd {
         self.rclk.set_high();
     }
 
-    pub fn display_number(&mut self, mut n: usize, doton: bool) {
+    pub fn display_number(&mut self, mut n: usize, dot: bool) {
         let ms = 1;
         self.set_number(n % 10);
         self.on_dig(3);
@@ -140,11 +142,60 @@ impl Ssd {
         delay_ms(ms);
         self.light_off();
 
-        if doton {
+        if dot {
             self.dot_on();
             self.on_dig(4);
             delay_ms(ms);
             self.light_off();
         }
+    }
+
+    pub fn display_panic(&mut self) {
+        let ms = 1;
+
+        self.rclk.set_low();
+        for s in 0u8..8 {
+            self.srclk.set_low();
+            if ((E >> s) & 0x1) == 0 {
+                self.ser.set_low();
+            } else {
+                self.ser.set_high();
+            }
+            self.srclk.set_high();
+        }
+        self.rclk.set_high();
+        self.on_dig(0);
+        delay_ms(ms);
+        self.light_off();
+
+        self.rclk.set_low();
+        for s in 0u8..8 {
+            self.srclk.set_low();
+            if ((R >> s) & 0x1) == 0 {
+                self.ser.set_low();
+            } else {
+                self.ser.set_high();
+            }
+            self.srclk.set_high();
+        }
+        self.rclk.set_high();
+        self.on_dig(1);
+        delay_ms(ms);
+        self.light_off();
+
+        self.rclk.set_low();
+        for s in 0u8..8 {
+            self.srclk.set_low();
+            if ((R >> s) & 0x1) == 0 {
+                self.ser.set_low();
+            } else {
+                self.ser.set_high();
+            }
+            self.srclk.set_high();
+        }
+        self.rclk.set_high();
+        self.on_dig(2);
+        delay_ms(ms);
+        self.light_off();
     }
 }
